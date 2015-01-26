@@ -2,17 +2,18 @@ package toolkit;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Perceptron extends SupervisedLearner {
 
-	double[] m_labels;
+	ArrayList<Double> weights;
 
 	@Override
 	public void train(Matrix features, Matrix labels) throws Exception {
-		m_labels = new double[labels.rows()];
-		ArrayList<Double> weights = new ArrayList<Double>(Collections.nCopies(features.cols(), 0.0));
+		double[] m_labels = new double[labels.rows()];
 		ArrayList<Double> previous1 = new ArrayList<Double>();
 		ArrayList<Double> previous2 = new ArrayList<Double>();
+		weights = new ArrayList<Double>(Collections.nCopies(features.cols(), 0.0));
 
 		while (continueOn(weights, previous1, previous2)) {
 			if (!previous1.isEmpty() && !previous2.isEmpty()) {
@@ -35,6 +36,7 @@ public class Perceptron extends SupervisedLearner {
 				adjustWeights(m_labels[i], weights, input, labels.row(i));
 			}
 
+			features.shuffle(new Random(), labels);
 		}
 	}
 
@@ -54,7 +56,8 @@ public class Perceptron extends SupervisedLearner {
 			double rate = 0.1;
 			for (int i = 0; i < weights.size(); ++i) {
 				double change = rate * difference * input[i];
-				weights.set(i, change);
+				double newValue = change + weights.get(i);
+				weights.set(i, newValue);
 			}
 		}
 
@@ -70,9 +73,12 @@ public class Perceptron extends SupervisedLearner {
 
 	@Override
 	public void predict(double[] features, double[] labels) throws Exception {
-		for (int i = 0; i < m_labels.length; i++)
-			labels[i] = m_labels[i];
 
+		double out = getSum(features, weights);
+		if(out>=0)
+			labels[0] = 1;
+		else
+			labels[0] = 0;
 	}
 
 }
