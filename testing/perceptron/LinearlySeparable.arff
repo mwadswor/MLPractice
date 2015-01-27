@@ -2,24 +2,23 @@
 
 @attribute test1 Real
 @attribute test2 Real
-@attribute threshold Real
 @attribute answer {True, False}
 
 @data
-1,1,1,False
-1,1,1,False
-1,1,1,False
-1,1,1,False
-1,0,1,True
-0,0,1,True
-0,1,1,False
-1,1,1,False
-1,1,1,False
-1,0,1,True
-0,0,1,True
-0,1,1,False
-1,0,1,True
-1,0,1,True
-1,0,1,True
-1,0,1,True
-0,1,1,False
+1,1,False
+1,1,False
+1,1,False
+1,1,False
+1,0,True
+0,0,True
+0,1,False
+1,1,False
+1,1,False
+1,0,True
+0,0,True
+0,1,False
+1,0,True
+1,0,True
+1,0,True
+1,0,True
+0,1,False

@@ -360,4 +360,23 @@ public class Matrix {
 			System.out.println("");
 		}
 	}
+
+
+	
+	public void addThresholdColumn() {
+		m_attr_name.add(0,"Threshold");
+		m_str_to_enum.add(0,new TreeMap<String, Integer>());
+		m_enum_to_str.add(0,new TreeMap<Integer, String>());
+		
+		for(int i = 0; i< m_data.size();i++){
+			double[] temp = m_data.get(i);
+			m_data.set(i, new double[temp.length+1]);
+			m_data.get(i)[0] = 1.0;
+			for (int j = 0; j < temp.length; ++j){
+				m_data.get(i)[j+1] = temp[j];
+			}
+			
+		}
+		
+	}
 }
