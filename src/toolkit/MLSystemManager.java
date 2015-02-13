@@ -47,7 +47,7 @@ public class MLSystemManager {
 		// Load the ARFF file
 		Matrix data = new Matrix();
 		data.loadArff(fileName);
-		data.addThresholdColumn();
+		//data.addThresholdColumn();
 		if (normalize)
 		{
 			System.out.println("Using normalized data\n");
